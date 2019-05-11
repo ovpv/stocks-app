@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/stocks-app/static/css/main.f0cdc0e2.chunk.css",
+    "main.js": "/stocks-app/static/js/main.8b225bcc.chunk.js",
+    "main.js.map": "/stocks-app/static/js/main.8b225bcc.chunk.js.map",
+    "runtime~main.js": "/stocks-app/static/js/runtime~main.6feacc1b.js",
+    "runtime~main.js.map": "/stocks-app/static/js/runtime~main.6feacc1b.js.map",
+    "static/js/2.f31b94f8.chunk.js": "/stocks-app/static/js/2.f31b94f8.chunk.js",
+    "static/js/2.f31b94f8.chunk.js.map": "/stocks-app/static/js/2.f31b94f8.chunk.js.map",
+    "index.html": "/stocks-app/index.html",
+    "precache-manifest.c95e158e58b446f10ac5f8d2eb3ef1fe.js": "/stocks-app/precache-manifest.c95e158e58b446f10ac5f8d2eb3ef1fe.js",
+    "service-worker.js": "/stocks-app/service-worker.js",
+    "static/css/main.f0cdc0e2.chunk.css.map": "/stocks-app/static/css/main.f0cdc0e2.chunk.css.map",
+    "static/media/down.png": "/stocks-app/static/media/down.0bb70c9d.png",
+    "static/media/skeleton.gif": "/stocks-app/static/media/skeleton.ff158f20.gif",
+    "static/media/up.png": "/stocks-app/static/media/up.7420f2b2.png"
+  }
+}
