@@ -22,20 +22,8 @@ const styles = theme => ({
 });
 
 class DataTable extends React.Component {
-	// handleChangePage = (event, page) => {
-	// 	this.setState({ page });
-	// };
-
-	// handleChangeRowsPerPage = event => {
-	// 	this.setState({ page: 0, rowsPerPage: event.target.value });
-	// };
-
 	render() {
 		const { classes } = this.props;
-		// const { rowsPerPage, page } = this.state;
-		// const emptyRows =
-		// 	rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
 		return (
 			<Paper className={classes.root}>
 				<div className={classes.tableWrapper}>
@@ -46,6 +34,7 @@ class DataTable extends React.Component {
 								<TableCell align="right">Price (in $)</TableCell>
 								<TableCell align="right">Difference</TableCell>
 								<TableCell align="right">Graph</TableCell>
+								<TableCell align="right">Last updated</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>{this.props.children}</TableBody>

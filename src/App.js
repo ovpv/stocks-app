@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import "./App.scss";
 import ConfigData from "./config";
 import DataTable from "./components/table";
@@ -9,6 +9,10 @@ import {
 	SparklinesLine,
 	SparklinesReferenceLine
 } from "react-sparklines";
+import up from "./assets/up.png";
+import down from "./assets/down.png";
+import loader from "./assets/skeleton.gif";
+import TimeAgo from "react-timeago";
 export default class App extends Component {
 	socket;
 	constructor() {
@@ -32,12 +36,26 @@ export default class App extends Component {
 								: [],
 							diff: prevstate.data[name]
 								? prevstate.data[name].price - price
+								: 0,
+							lastUpdated: prevstate.data[name]
+								? this.updateTime(
+										prevstate.data[name].lastUpdated,
+										prevstate.data[name].diff
+								  )
 								: 0
 						}
 					}
 				}));
 			});
 		};
+	}
+	updateTime(prevTime, diff) {
+		let now = Date.now();
+		now = new Date(now);
+		if (diff === 0) {
+			return prevTime;
+		}
+		return now;
 	}
 	updatePriceData(pricedata, price) {
 		pricedata.push(price);
@@ -48,33 +66,76 @@ export default class App extends Component {
 	}
 	render() {
 		const { data } = this.state;
-		console.log(data);
 		return (
 			<div className="App">
-				<h2>Hello world</h2>
-				<DataTable>
-					{Object.keys(data).map((key, index) => (
-						<TableRow key={index} count={Object.keys(data).length}>
-							<TableCell component="th" scope="row">
-								{key}
-							</TableCell>
-							<TableCell align="right">{data[key].price}</TableCell>
-							<TableCell align="right">{data[key].diff}</TableCell>
-							<TableCell align="right">
-								<Sparklines
-									data={data[key].pricedata}
-									limit={5}
-									width={100}
-									height={20}
-									margin={5}
-								>
-									<SparklinesLine color="blue" />
-									<SparklinesReferenceLine type="mean" />
-								</Sparklines>
-							</TableCell>
-						</TableRow>
-					))}
-				</DataTable>
+				<h2>Live Stocks App</h2>
+				<div
+					className="container"
+					style={{
+						marginBottom: "100px"
+					}}
+				>
+					<Suspense fallback={<image src={loader} alt="app is loading" />}>
+						<DataTable>
+							{Object.keys(data).map((key, index) => (
+								<TableRow key={index} count={Object.keys(data).length}>
+									<TableCell component="th" scope="row">
+										{key}{" "}
+										{data[key].diff !== 0 ? (
+											<img
+												src={data[key].diff <= 0 ? up : down}
+												height={15}
+												width={15}
+												alt="Logo"
+											/>
+										) : (
+											` `
+										)}
+									</TableCell>
+									<TableCell align="right">
+										{Number.parseFloat(data[key].price).toFixed(2)}
+									</TableCell>
+									<TableCell align="right">
+										{Number.parseFloat(data[key].diff).toFixed(2)}
+									</TableCell>
+									<TableCell align="right">
+										<Sparklines
+											data={data[key].pricedata}
+											limit={5}
+											width={100}
+											height={20}
+											margin={5}
+										>
+											<SparklinesLine color="blue" />
+											<SparklinesReferenceLine type="mean" />
+										</Sparklines>
+									</TableCell>
+									<TableCell align="right">
+										{data[key].lastUpdated !== 0 ? (
+											<TimeAgo date={data[key].lastUpdated} />
+										) : (
+											`Not updated yet.`
+										)}
+									</TableCell>
+								</TableRow>
+							))}
+						</DataTable>
+					</Suspense>
+				</div>
+				<div
+					style={{
+						backgroundColor: "#f3f3f3",
+						position: "fixed",
+						width: "100%",
+						minHeight: "50px",
+						bottom: 0,
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center"
+					}}
+				>
+					<span>created by Vishnuprasad</span>
+				</div>
 			</div>
 		);
 	}
