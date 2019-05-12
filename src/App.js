@@ -67,7 +67,7 @@ export default class App extends Component {
 	 * Method to update timeago if there is a change in price
 	 *
 	 * @param {number} prevTime
-	 * @param {Int16Array} diff
+	 * @param {number} diff
 	 * @returns number
 	 * @memberof App
 	 */
