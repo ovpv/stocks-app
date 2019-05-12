@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -8,6 +8,13 @@ import TableHead from "@material-ui/core/TableHead";
 import TableCell from "@material-ui/core/TableCell";
 import Paper from "@material-ui/core/Paper";
 
+/**
+ * styles set by default for the material ui table
+ *
+ * @param {*} theme
+ * @returns object
+ *
+ */
 const styles = theme => ({
 	root: {
 		width: "100%",
@@ -21,7 +28,15 @@ const styles = theme => ({
 	}
 });
 
-class DataTable extends React.Component {
+/**
+ *  Component which renders the data in Material ui Table
+ *
+ * @class DataTable
+ * @extends {Component}
+ *
+ * @method render
+ */
+class DataTable extends Component {
 	render() {
 		const { classes } = this.props;
 		return (
