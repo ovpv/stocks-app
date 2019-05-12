@@ -13,6 +13,20 @@ import up from "./assets/up.png";
 import down from "./assets/down.png";
 import loader from "./assets/skeleton.gif";
 import TimeAgo from "react-timeago";
+
+/**
+ *
+ * Base app component
+ * @export
+ * @class App
+ * @extends {Component}
+ *
+ * @method componentDidMount
+ * @method updateTime
+ * @method updatePriceData
+ * @method render
+ *
+ */
 export default class App extends Component {
 	socket;
 	constructor() {
@@ -49,6 +63,14 @@ export default class App extends Component {
 			});
 		};
 	}
+	/**
+	 * Method to update timeago if there is a change in price
+	 *
+	 * @param {number} prevTime
+	 * @param {number} diff
+	 * @returns number
+	 * @memberof App
+	 */
 	updateTime(prevTime, diff) {
 		let now = Date.now();
 		now = new Date(now);
@@ -57,6 +79,14 @@ export default class App extends Component {
 		}
 		return now;
 	}
+	/**
+	 * Method to provide array pricedata of length=5 for reaact Sparklines
+	 *
+	 * @param {Array} pricedata
+	 * @param {Float} price
+	 * @returns Array
+	 * @memberof App
+	 */
 	updatePriceData(pricedata, price) {
 		pricedata.push(price);
 		if (pricedata.length > 5) {
